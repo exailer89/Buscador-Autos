@@ -39,38 +39,40 @@ document.addEventListener('DOMContentLoaded', () => { // Se ejecuta una vez el H
 marca.addEventListener('change', e => {
     // console.log(e.target.value);
     datosBusqueda.marca = e.target.value;
-    console.log(datosBusqueda);
+    // console.log(datosBusqueda);
+
+    filtrarAuto();
 });
 
 year.addEventListener('change', e => {
     // console.log(e.target.value);
     datosBusqueda.year = e.target.value;
-    console.log(datosBusqueda);
+    // console.log(datosBusqueda);
 });
 
 minimo.addEventListener('change', e => {
     datosBusqueda.minimo = e.target.value;
-    console.log(datosBusqueda);
+    // console.log(datosBusqueda);
 });
 
 maximo.addEventListener('change', e => {
     datosBusqueda.maximo = e.target.value;
-    console.log(datosBusqueda);
+    // console.log(datosBusqueda);
 });
 
 puertas.addEventListener('change', e => {
     datosBusqueda.puertas = e.target.value;
-    console.log(datosBusqueda);
+    // console.log(datosBusqueda);
 });
 
 transmision.addEventListener('change', e => {
     datosBusqueda.transmision = e.target.value;
-    console.log(datosBusqueda);
+    // console.log(datosBusqueda);
 });
 
 color.addEventListener('change', e => {
     datosBusqueda.color = e.target.value;
-    console.log(datosBusqueda);
+    // console.log(datosBusqueda);
 });
 
 
@@ -97,4 +99,18 @@ function llenarSelect() {
         opcion.textContent = i;
         year.appendChild(opcion); // Agrega las opciones de año al select
     }
+}
+
+// Función que filtra en base a la busqueda.
+function filtrarAuto() {
+    const resultado = autos.filter(filtrarMarca); // A esto se le conoce como "Funciones de Alto Nivel", que son funciones que tienen como párametro otra función.
+}
+
+function filtrarMarca(auto) {
+    const {marca} = datosBusqueda;
+    if (marca) {
+        return auto.marca === datosBusqueda.marca; // Obtienes el auto de la marca que seleccionaste.
+    }
+
+    return auto; // Si el usuario no ha seleccionado nada, se devuelven todos los autos.
 }
