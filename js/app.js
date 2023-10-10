@@ -46,8 +46,10 @@ marca.addEventListener('change', e => {
 
 year.addEventListener('change', e => {
     // console.log(e.target.value);
-    datosBusqueda.year = e.target.value;
+    datosBusqueda.year = parseInt(e.target.value); // Casi todos los datos obtenidos de un formulario seran STRING, para evitar errores, realizamos cambio a Entero, de esta manera nuestro filtro funcionará sin problema.
     // console.log(datosBusqueda);
+
+    filtrarAuto();
 });
 
 minimo.addEventListener('change', e => {
@@ -103,14 +105,25 @@ function llenarSelect() {
 
 // Función que filtra en base a la busqueda.
 function filtrarAuto() {
-    const resultado = autos.filter(filtrarMarca); // A esto se le conoce como "Funciones de Alto Nivel", que son funciones que tienen como párametro otra función.
+    const resultado = autos.filter(filtrarMarca).filter(filtrarYear); // A esto se le conoce como "Funciones de Alto Nivel", que son funciones que tienen como párametro otra función. // Filter se puede encadenar para filtrar por varios valores
+
+    console.log(resultado);
 }
 
 function filtrarMarca(auto) {
     const {marca} = datosBusqueda;
     if (marca) {
-        return auto.marca === datosBusqueda.marca; // Obtienes el auto de la marca que seleccionaste.
+        return auto.marca === marca; // Obtienes el auto de la marca que seleccionaste.
     }
 
     return auto; // Si el usuario no ha seleccionado nada, se devuelven todos los autos.
+}
+
+function filtrarYear(auto) {
+    const {year} = datosBusqueda;
+    if (year) {
+        return auto.year === year;
+    }
+
+    return auto;
 }
