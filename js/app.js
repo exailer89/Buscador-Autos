@@ -1,18 +1,76 @@
 // Variables
-const resultado = document.querySelector('#resultado');
+const marca = document.querySelector('#marca');
 const year = document.querySelector('#year');
+const minimo = document.querySelector('#minimo');
+const maximo = document.querySelector('#maximo');
+const puertas = document.querySelector('#puertas');
+const transmision = document.querySelector('#transmision');
+const color = document.querySelector('#color');
+
+// Contenedor para los resultados
+const resultado = document.querySelector('#resultado');
 
 const max = new Date().getFullYear();
 const min = max - 10;
 
+// Generar un objeto con la busqueda
+const datosBusqueda = {
+    marca : '',
+    year : '',
+    minimo : '',
+    maximo : '',
+    puertas : '',
+    transmision : '',
+    color : ''
+}
 
-// Eventoos
+
+// Eventos
 document.addEventListener('DOMContentLoaded', () => { // Se ejecuta una vez el HTML este listo.
     // Muestra los automiviles.
     mostrarAutos();
 
     // Llena las opciones de años.
     llenarSelect();
+});
+
+
+// EventListener para los select de busqueda
+marca.addEventListener('change', e => {
+    // console.log(e.target.value);
+    datosBusqueda.marca = e.target.value;
+    console.log(datosBusqueda);
+});
+
+year.addEventListener('change', e => {
+    // console.log(e.target.value);
+    datosBusqueda.year = e.target.value;
+    console.log(datosBusqueda);
+});
+
+minimo.addEventListener('change', e => {
+    datosBusqueda.minimo = e.target.value;
+    console.log(datosBusqueda);
+});
+
+maximo.addEventListener('change', e => {
+    datosBusqueda.maximo = e.target.value;
+    console.log(datosBusqueda);
+});
+
+puertas.addEventListener('change', e => {
+    datosBusqueda.puertas = e.target.value;
+    console.log(datosBusqueda);
+});
+
+transmision.addEventListener('change', e => {
+    datosBusqueda.transmision = e.target.value;
+    console.log(datosBusqueda);
+});
+
+color.addEventListener('change', e => {
+    datosBusqueda.color = e.target.value;
+    console.log(datosBusqueda);
 });
 
 
