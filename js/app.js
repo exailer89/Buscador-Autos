@@ -28,7 +28,7 @@ const datosBusqueda = {
 // Eventos
 document.addEventListener('DOMContentLoaded', () => { // Se ejecuta una vez el HTML este listo.
     // Muestra los automiviles.
-    mostrarAutos();
+    mostrarAutos(autos);
 
     // Llena las opciones de años.
     llenarSelect();
@@ -79,7 +79,10 @@ color.addEventListener('change', e => {
 
 
 // Funcion para mostrar los autos en el HTML
-function mostrarAutos() {
+function mostrarAutos(autos) {
+    
+    limpiarHTML(); // Elimina el HTML Previo
+
     autos.forEach(auto => {
         const autoHTML = document.createElement('p');
         const {marca, modelo, year, puertas, transmision, precio, color} = auto;
@@ -92,6 +95,15 @@ function mostrarAutos() {
         resultado.appendChild(autoHTML);
     });
 }
+
+
+// Limpiar HTML
+function limpiarHTML() {
+    while(resultado.firstChild) {
+        resultado.removeChild(resultado.firstChild);
+    }
+}
+
 
 // Funcion para generar los aos del select
 function llenarSelect() {
@@ -107,7 +119,7 @@ function llenarSelect() {
 function filtrarAuto() {
     const resultado = autos.filter(filtrarMarca).filter(filtrarYear); // A esto se le conoce como "Funciones de Alto Nivel", que son funciones que tienen como párametro otra función. // Filter se puede encadenar para filtrar por varios valores
 
-    console.log(resultado);
+    mostrarAutos(resultado);
 }
 
 function filtrarMarca(auto) {
