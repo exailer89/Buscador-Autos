@@ -55,11 +55,15 @@ year.addEventListener('change', e => {
 minimo.addEventListener('change', e => {
     datosBusqueda.minimo = e.target.value;
     // console.log(datosBusqueda);
+
+    filtrarAuto();
 });
 
 maximo.addEventListener('change', e => {
     datosBusqueda.maximo = e.target.value;
     // console.log(datosBusqueda);
+
+    filtrarAuto();
 });
 
 puertas.addEventListener('change', e => {
@@ -117,7 +121,7 @@ function llenarSelect() {
 
 // Función que filtra en base a la busqueda.
 function filtrarAuto() {
-    const resultado = autos.filter(filtrarMarca).filter(filtrarYear); // A esto se le conoce como "Funciones de Alto Nivel", que son funciones que tienen como párametro otra función. // Filter se puede encadenar para filtrar por varios valores
+    const resultado = autos.filter(filtrarMarca).filter(filtrarYear).filter(filtrarMinimo).filter(filtrarMaximo); // A esto se le conoce como "Funciones de Alto Nivel", que son funciones que tienen como párametro otra función. // Filter se puede encadenar para filtrar por varios valores
 
     mostrarAutos(resultado);
 }
@@ -135,6 +139,24 @@ function filtrarYear(auto) {
     const {year} = datosBusqueda;
     if (year) {
         return auto.year === year;
+    }
+
+    return auto;
+}
+
+function filtrarMinimo(auto) {
+    const {minimo} = datosBusqueda;
+    if (minimo) {
+        return auto.precio >= minimo;
+    }
+
+    return auto;
+}
+
+function filtrarMaximo(auto) {
+    const {maximo} = datosBusqueda;
+    if (maximo) {
+        return auto.precio <= maximo;
     }
 
     return auto;
