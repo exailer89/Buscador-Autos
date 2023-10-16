@@ -129,7 +129,20 @@ function llenarSelect() {
 function filtrarAuto() {
     const resultado = autos.filter(filtrarMarca).filter(filtrarYear).filter(filtrarMinimo).filter(filtrarMaximo).filter(filtrarPuertas).filter(filtrarTransmision).filter(filtrarColor); // A esto se le conoce como "Funciones de Alto Nivel", que son funciones que tienen como párametro otra función. // Filter se puede encadenar para filtrar por varios valores
 
-    mostrarAutos(resultado);
+    if (resultado.length) {
+        mostrarAutos(resultado);
+    } else {
+        sinResultados();
+    }
+}
+
+function sinResultados() {
+    limpiarHTML();
+
+    const divNoResultado = document.createElement('div');
+    divNoResultado.classList.add('alerta', 'error');
+    divNoResultado.textContent = 'No hay resultados, intenta con otros parámetros de busqueda';
+    resultado.appendChild(divNoResultado);
 }
 
 function filtrarMarca(auto) {
